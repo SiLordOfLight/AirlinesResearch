@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Airline Data Research</title>
-  </head>
+  {%set page_title = "Airline Data Research"%}
+  {%include "header.html"%}
+  
   <body>
+    {% include "navbar.html" %}
     <p>
       The information on this website was sourced from the CORGIS Airline Dataset, which can be found <a href="https://think.cs.vt.edu/corgis/json/airlines/airlines.html">here</a>.
       The data contains information about the flights out of every major airport in the U.S.A. on every carrier between 2003 and 2016, including points on the number of flights,

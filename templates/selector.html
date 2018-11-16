@@ -1,0 +1,21 @@
+<form class="{{options_type}}-selector" action="/{{location}}">
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
+        <select class="form-control" name="{{options_type}}-result">
+          {%for opt in opts%}
+          <option value="{{opt}}" {% if opt == current %}selected{% endif %}>{{opt}}</option>
+          {%endfor%}
+        </select>
+      </div>
+    </div>
+
+    <div class="col-1">
+
+    </div>
+
+    <div class="col-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
