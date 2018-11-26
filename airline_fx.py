@@ -41,22 +41,64 @@ def getDataForAirport(data, airport):
     return out
 
 def getAirlineWithMostDelaysAtAirport(airportData):
-    out = {}
+    rawVals = {}
 
     for dp in airportData:
-        if dp["carrier"]["code"] in out:
-            out[dp["carrier"]["code"]] += dp["statistics"]["# of delays"]["carrier"]
+        if dp["carrier"]["code"] in rawVals:
+            rawVals[dp["carrier"]["code"]][0] += dp["statistics"]["flights"]["total"]
+            rawVals[dp["carrier"]["code"]][1] += dp["statistics"]["# of delays"]["carrier"]
 
         else:
-            out[dp["carrier"]["code"]] = dp["statistics"]["# of delays"]["carrier"]
+            rawVals[dp["carrier"]["code"]] = []
+            rawVals[dp["carrier"]["code"]].append(dp["statistics"]["flights"]["total"])
+            rawVals[dp["carrier"]["code"]].append(dp["statistics"]["# of delays"]["carrier"])
 
-    print(out)
+
+
+    percents = {}
+
+    for airline,raws in rawVals.items():
+        percents[airline] = (float(raws[1])/float(raws[0])) * 100.0
+
+    # print(percents)
 
     max = 0
     result = ""
-    for nm,val in out:
+    for nm,val in percents.items():
         if val > max:
             result = nm
-            val = max
+            max = val
+
+    # print(result)
 
     return result
+
+def getDelayDataForAirport(airportData, allData):
+    rawVals = {}
+
+    for dp in airportData:
+        if dp["carrier"]["code"] in rawVals:
+            rawVals[dp["carrier"]["code"]][0] += dp["statistics"]["flights"]["total"]
+            rawVals[dp["carrier"]["code"]][1] += dp["statistics"]["# of delays"]["carrier"]
+
+        else:
+            rawVals[dp["carrier"]["code"]] = []
+            rawVals[dp["carrier"]["code"]].append(dp["statistics"]["flights"]["total"])
+            rawVals[dp["carrier"]["code"]].append(dp["statistics"]["# of delays"]["carrier"])
+
+    percents = {}
+
+    for airline,raws in rawVals.items():
+        percents[airline] = (float(raws[1])/float(raws[0])) * 100.0
+
+    res = []
+    matcher = getAirlinesDict(allData)
+
+    for k,v in percents.items():
+        name = matcher[k]
+        stri = "%s (%s)\t[%i %% of flights delayed]" % (name, k, v)
+        res.append(stri)
+
+    # print(res)
+
+    return res

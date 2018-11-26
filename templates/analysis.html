@@ -4,9 +4,29 @@
   {%include "header.html"%}
 
   <body>
-    {%set options_type = "airport"%}
-    {%set location = "analysis"%}
-    {%include "selector.html"%}
+    {% include "navbar.html" %}
+
+    <div class="main-content">
+      {% if airport == "!!!" %}
+        <h1>Select an airport to view data on flight delays</h1>
+      {% endif %}
+
+      {%set options_type = "airport"%}
+      {%set location = "analysis"%}
+      {%include "selector.html"%}
+      <br><br>
+
+      {% if not airport == "!!!" %}
+        <h3>The airline with the most delays at {{airport}} is {{maxAirport}}</h3>
+        <br>
+        <h4>The following airlines had flights at this airport:</h4><br>
+        <ul>
+          {% for airline in delayData %}
+            <li>{{airline}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
 
   </body>
 </html>

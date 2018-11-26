@@ -2,31 +2,35 @@
 <html lang="en" dir="ltr">
   {%set page_title = "Airline Data Research"%}
   {%include "header.html"%}
-  
+
   <body>
     {% include "navbar.html" %}
-    <p>
-      The information on this website was sourced from the CORGIS Airline Dataset, which can be found <a href="https://think.cs.vt.edu/corgis/json/airlines/airlines.html">here</a>.
-      The data contains information about the flights out of every major airport in the U.S.A. on every carrier between 2003 and 2016, including points on the number of flights,
-      as well as the duration, frequency, type, and length of delays.<br><br>
-      Data is reported for the following airlines:<br>
-      <ul>
-        {% for airline in airlines %}
-          <li>{{airline}}</li>
-        {% endfor %}
-      </ul><br>
-      It should be noted that the following mergers have occurred throughout the range of the dataset, after which the named airlines reported as one:<br>
-      <ul>
-        <li>US Airways & America West >>> US Airways [2006]</li>
-        <li>Delta & Northwest >>> Delta [2010]</li>
-        <li>United & Continental >>> United [2012]</li>
-        <li>Atlantic Southeast & ExpressJet >>> ExpressJet [2012]</li>
-        <li>Pinnacle >>> Endeavor [2013]</li>
-        <li>American Eagle >>> Envoy [2014]</li>
-        <li>Southwest & AirTran >>> Southwest [2015]</li>
-        <li>American & US Airways >>> American [2015]</li>
-      </ul><br>
 
-    </p>
+    <div class="main-content">
+      <h1>An Explanation of the Data</h1>
+      <p>
+        The information on this website was sourced from the CORGIS Airline Dataset, which can be found <a href="https://think.cs.vt.edu/corgis/json/airlines/airlines.html">here</a>.
+        The data contains information about the flights out of every major airport in the U.S.A. on every carrier between 2003 and 2016, including points on the number of flights,
+        as well as the duration, frequency, type, and length of delays.<br><br>
+        Data is reported for the following airlines:<br>
+        <ul>
+          {% for airline in airlines %}
+            <li>{{airline}}</li>
+          {% endfor %}
+        </ul><br>
+        It should be noted that the following mergers have occurred throughout the range of the dataset, after which the named airlines reported as one:<br>
+        <ul>
+          <li>US Airways & America West >>> US Airways [2006]</li>
+          <li>Delta & Northwest >>> Delta [2010]</li>
+          <li>United & Continental >>> United [2012]</li>
+          <li>Atlantic Southeast & ExpressJet >>> ExpressJet [2012]</li>
+          <li>Pinnacle >>> Endeavor [2013]</li>
+          <li>American Eagle >>> Envoy [2014]</li>
+          <li>Southwest & AirTran >>> Southwest [2015]</li>
+          <li>American & US Airways >>> American [2015]</li>
+        </ul><br>
+
+      </p>
+    </div>
   </body>
 </html>
