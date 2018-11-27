@@ -102,3 +102,42 @@ def getDelayDataForAirport(airportData, allData):
     # print(res)
 
     return res
+
+def getFlightDataForAirport(airportData, allData):
+    rawVals = {}
+
+    for dp in airportData:
+        if dp["carrier"]["code"] in rawVals:
+            rawVals[dp["carrier"]["code"]] += dp["statistics"]["flights"]["total"]
+
+        else:
+            rawVals[dp["carrier"]["code"]]= dp["statistics"]["flights"]["total"]
+
+    res = []
+    matcher = getAirlinesDict(allData)
+
+    for k,v in rawVals.items():
+        name = matcher[k]
+        stri = "%s (%s)\t[%i flights]" % (name, k, v)
+        res.append(stri)
+
+    return res
+
+def getAirlineWithMostFlightsAtAirport(airportData):
+    rawVals = {}
+
+    for dp in airportData:
+        if dp["carrier"]["code"] in rawVals:
+            rawVals[dp["carrier"]["code"]] += dp["statistics"]["flights"]["total"]
+
+        else:
+            rawVals[dp["carrier"]["code"]]= dp["statistics"]["flights"]["total"]
+
+    max = 0
+    result = ""
+    for nm,val in rawVals.items():
+        if val > max:
+            result = nm
+            max = val
+
+    return result

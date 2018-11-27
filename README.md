@@ -1,6 +1,6 @@
 # AirlinesResearch
 
-## Analyis Pages:
+## Analysis Pages:
 * Delays by airport & airline
 * Flights by airport and airline
 * Cancellations by year and airline
