@@ -19,6 +19,15 @@ def getAirlinesDict(data):
 
     return out
 
+def getAirportDict(data):
+    out = {}
+
+    for dp in data:
+        if dp["airport"]["code"] not in out:
+            out[dp["airport"]["code"]] = dp["airport"]["name"]
+
+    return out
+
 def getAirports(data):
     out = []
     rep = []
@@ -141,3 +150,53 @@ def getAirlineWithMostFlightsAtAirport(airportData):
             max = val
 
     return result
+
+def rankAirportsByWeatherDelays(allData):
+    airports = {}
+
+    for dp in allData:
+        ac = dp["airport"]["code"]
+        val = dp["statistics"]["# of delays"]["weather"]
+
+        if ac not in airports:
+            airports[ac] = val
+        else:
+            airports[ac] += val
+
+    sorte = sorted(airports.items(), key=lambda kv: kv[1])
+    matcher = getAirportDict(allData)
+
+    out = []
+
+    for tup in sorte:
+        nev = "%s (%s) [%i Weather Delays]" % (matcher[tup[0]],tup[0],tup[1])
+        out.append(nev)
+
+    out.reverse()
+
+    return out
+
+def rankAirlinesByCancellations(allData):
+    airlines = {}
+
+    for dp in allData:
+        ac = dp["carrier"]["code"]
+        val = float(dp["statistics"]["flights"]["cancelled"]) / float(dp["statistics"]["flights"]["total"])
+
+        if ac not in airlines:
+            airlines[ac] = val
+        else:
+            airlines[ac] += val
+
+    sorte = sorted(airlines.items(), key=lambda kv: kv[1])
+    matcher = getAirlinesDict(allData)
+
+    out = []
+
+    for tup in sorte:
+        nev = "%s (%s)" % (matcher[tup[0]],tup[0])
+        out.append(nev)
+
+    out.reverse()
+
+    return out
