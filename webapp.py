@@ -5,9 +5,10 @@ import airline_fx as afx
 
 app = Flask(__name__)
 
-navItems = [{"page":"/", "title":"Home", "id":"home"}, {"page":"research", "title":"Research", "id":"research"}, {"title":"drp1"}, {"title":"drp2"}]
+navItems = [{"page":"/", "title":"Home", "id":"home"}, {"page":"research", "title":"Research", "id":"research"}, {"title":"drp1"}, {"title":"drp2"}, {"title":"drp3"}]
 dropdowns = {"drp1":[{'title':'Airport Analyses'}, {'title':"# of Delays", 'page':"byDelays"}, {'title':"# of Flights", 'page':"byFlights"}, {'title':"# of Weather Delays", 'page':"byWeather"}]}
 dropdowns["drp2"] = [{'title':"Airline Analyses"}, {'title':"Cancellations", 'page':"byCancelled"}]
+dropdowns["drp3"] = [{'title':"Visual Analyses"}, {'title':"# of Flights", 'page':"byFlightsView"}]
 
 @app.route("/") #annotation tells the url that will make this function run
 def render_main():
