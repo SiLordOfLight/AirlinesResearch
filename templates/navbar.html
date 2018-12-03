@@ -1,4 +1,6 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">&#9992;</a>
   <!-- Toggler/collapsible Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -11,20 +13,26 @@
         {% if "drp" in item["title"] %}
         {% set item2 = dropdowns[item['title']] %}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle {% if item['title'] in activePage %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{item2[0]['title']}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
             {% for item3 in item2[1:] %}
-              <a class="dropdown-item {% if activePage == item3['page'] %}active{% endif %}" href="{{item3['page']}}">{{item3['title']}}</a>
+              <a class="dropdown-item {% if item3['page'] in activePage %}active{% endif %}" href="{{item3['page']}}">{{item3['title']}}</a>
             {% endfor %}
           </div>
         </li>
         {% else %}
-        <li class="nav-item" {%if activePage == item['id']%}class="active"{%endif%} ><a class="nav-link" href="{{item['page']}}">{{item['title']}}</a></li>
+        <li class="nav-item {%if activePage == item['id']%}active{%endif%}"><a class="nav-link" href="{{item['page']}}">{{item['title']}}</a></li>
         {% endif %}
       {% endfor %}
+
+
     </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item my-2 my-lg-0"> <a class="nav-link" href="{{url_for('static', filename='airlines.json')}}" download>Download Data</a> </li>
+    </ul>
+
   </div>
 </nav>

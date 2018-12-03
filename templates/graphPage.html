@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  {%set page_title = "View Graph: "+title%}
+  {%include "header.html"%}
+
+  <body>
+    {% include "navbar.html" %}
+
+    <div class="main-content" id="graphPageCont">
+      <h1 id="pageTitle">{{title}}</h1>
+      <img src="{{url_for('static', filename=img+'.png')}}" alt="No Graph">
+    </div>
+
+  </body>
+</html>

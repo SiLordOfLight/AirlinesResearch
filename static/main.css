@@ -1,9 +1,18 @@
 .main-content {
   margin: 20px;
+
+  background-image: url("bg.jpg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
 }
 
 #homeTitle {
   margin: auto;
   text-align: center;
   vertical-align: middle;
+}
+
+#graphPageCont {
+  text-align: center;
 }

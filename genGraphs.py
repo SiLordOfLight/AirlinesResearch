@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import json
 
-with open('airlines.json') as inFile:
+with open('static/airlines.json') as inFile:
     rawData = json.load(inFile)
 
 rawVals = {}
@@ -25,14 +25,16 @@ ind = np.arange(len(xs))  # the x locations for the groups
 width = 0.35  # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(ind, ys, width,
-                color='SkyBlue', label='# of Delays')
+# rects1 = ax.bar(ind, ys, width,
+#                 color='SkyBlue', label='# of Delays')
+#
+# ax.set_ylabel('# of Flights')
+# ax.set_xlabel('Airline')
+# ax.set_title('Flights by Airline')
+# ax.set_xticks(ind)
+# ax.set_xticklabels(xs)
+# ax.legend()
 
-ax.set_ylabel('# of Flights')
-ax.set_xlabel('Airline')
-ax.set_title('Flights by Airline')
-ax.set_xticks(ind)
-ax.set_xticklabels(xs)
-ax.legend()
+depi = ax.pie(ys, labels=xs)
 
 plt.show()
