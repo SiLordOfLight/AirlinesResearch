@@ -1,10 +1,24 @@
 .main-content {
-  margin: 20px;
+  margin: 0;
+  /* padding: 20px; */
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  /* text-align: center; */
+}
 
+body, html {
+  height: 100%;
+}
+
+.bg-img {
   background-image: url("bg.jpg");
+  filter: blur(20px);
+  height: 100%;
   background-repeat: no-repeat;
-  background-position: right top;
+  background-position: center;
   background-attachment: fixed;
+  background-size: cover;
 }
 
 #homeTitle {
