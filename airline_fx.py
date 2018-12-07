@@ -101,10 +101,11 @@ def getDelayDataForAirport(airportData, allData):
         percents[airline] = (float(raws[1])/float(raws[0])) * 100.0
 
     sorte = sorted(percents.items(), key=lambda kv: kv[1])
+    sorte.reverse()
     res = []
     matcher = getAirlinesDict(allData)
 
-    for k,v in sorte.items():
+    for k,v in sorte:
         name = matcher[k]
         stri = "%s (%s)\t[%i %% of flights delayed]" % (name, k, v)
         res.append(stri)
@@ -124,10 +125,11 @@ def getFlightDataForAirport(airportData, allData):
             rawVals[dp["carrier"]["code"]]= dp["statistics"]["flights"]["total"]
 
     sorte = sorted(rawVals.items(), key=lambda kv: kv[1])
+    sorte.reverse()
     res = []
     matcher = getAirlinesDict(allData)
 
-    for k,v in sorte.items():
+    for k,v in sorte:
         name = matcher[k]
         stri = "%s (%s)\t[%i flights]" % (name, k, v)
         res.append(stri)
