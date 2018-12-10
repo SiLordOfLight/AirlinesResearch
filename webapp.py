@@ -83,11 +83,11 @@ def render_cancelled():
 
 @app.route("/byFlightsView") #annotation tells the url that will make this function run
 def render_flightsView():
-    return render_template("graphPage.html", navItems=navItems, dropdowns=dropdowns, activePage="byFlightsView drp3", title="Total Number of Flights", img="numOfFlights")
+    return render_template("byFlightsView.html", navItems=navItems, dropdowns=dropdowns, activePage="byFlightsView drp3", title="Total Number of Flights", img="numOfFlights")
 
 @app.route("/byPercentTraffic") #annotation tells the url that will make this function run
 def render_trafficView():
-    return render_template("graphPage.html", navItems=navItems, dropdowns=dropdowns, activePage="byPercentTraffic drp3", title="Percentage of Air Traffic", img="percentTraffic")
+    return render_template("byTrafficView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPercentTraffic drp3", title="Percentage of Air Traffic", img="percentTraffic")
 
 
 if __name__=="__main__":
