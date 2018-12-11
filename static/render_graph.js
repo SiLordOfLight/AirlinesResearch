@@ -63,6 +63,14 @@ function loadTrafficPie(allData) {
     }
   }
 
+  var color = [];
+  for (var i in values) {
+    if (values.hasOwnProperty(i)) {
+      var newCol = Math.floor(Math.random() * 16777215);
+      color.push("#"+newCol.toString(16));
+    }
+  }
+
   var canvas = document.getElementById('graphCanvas').getContext('2d');
 
   var chart = new Chart(canvas, {
@@ -72,8 +80,7 @@ function loadTrafficPie(allData) {
         labels: labels,
         datasets: [{
             label: "% Traffic",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: color,
             data: values,
         }]
     },
