@@ -8,7 +8,7 @@ app = Flask(__name__)
 navItems = [{"page":"/", "title":"Home", "id":"home"}, {"page":"research", "title":"Research", "id":"research"}, {"title":"drp1"}, {"title":"drp2"}, {"title":"drp3"}]
 dropdowns = {"drp1":[{'title':'Airport Analyses'}, {'title':"# of Delays", 'page':"byDelays"}, {'title':"# of Flights", 'page':"byFlights"}, {'title':"# of Weather Delays", 'page':"byWeather"}]}
 dropdowns["drp2"] = [{'title':"Airline Analyses"}, {'title':"Cancellations", 'page':"byCancelled"}]
-dropdowns["drp3"] = [{'title':"Visual Analyses"}, {'title':"# of Flights", 'page':"byFlightsView"}, {'title':"% of Air Traffic", 'page':"byPercentTraffic"}]
+dropdowns["drp3"] = [{'title':"Visual Analyses"}, {'title':"# of Flights", 'page':"byFlightsView"}, {'title':"% of Air Traffic", 'page':"byPercentTraffic"}, {'title':"Flights from Airports", 'page':"byAirportTraffic"}, {'title':"Airline Punctuality Breakdown", 'page':"byPunctBreakdown"}]
 
 @app.route("/") #annotation tells the url that will make this function run
 def render_main():
@@ -83,11 +83,24 @@ def render_cancelled():
 
 @app.route("/byFlightsView") #annotation tells the url that will make this function run
 def render_flightsView():
-    return render_template("byFlightsView.html", navItems=navItems, dropdowns=dropdowns, activePage="byFlightsView drp3", title="Total Number of Flights", img="numOfFlights")
+    return render_template("byFlightsView.html", navItems=navItems, dropdowns=dropdowns, activePage="byFlightsView drp3", title="Total Number of Flights")
 
 @app.route("/byPercentTraffic") #annotation tells the url that will make this function run
 def render_trafficView():
-    return render_template("byTrafficView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPercentTraffic drp3", title="Percentage of Air Traffic", img="percentTraffic")
+    return render_template("byTrafficView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPercentTraffic drp3", title="Percentage of Air Traffic")
+
+@app.route("/byAirportTraffic") #annotation tells the url that will make this function run
+def render_airportView():
+    return render_template("byAirportView.html", navItems=navItems, dropdowns=dropdowns, activePage="byAirportTraffic drp3", title="Flight Count by Airport")
+
+@app.route("/byPunctBreakdown") #annotation tells the url that will make this function run
+def render_breakdownView():
+    try:
+        airline = request.args["airline-result"]
+        airlineCode = airline.split("(")[1].replace(")", "")
+        return render_template("byPunctualityView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPunctBreakdown drp3", title="Airline Punctuality Breakdown", opts=afx.getAirlines(allData), airline=airlineCode)
+    except:
+        return render_template("byPunctualityView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPunctBreakdown drp3", title="Airline Punctuality Breakdown", opts=afx.getAirlines(allData), airline="!!!")
 
 
 if __name__=="__main__":

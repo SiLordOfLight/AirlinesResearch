@@ -30,3 +30,7 @@ body, html {
 #graphPageCont {
   text-align: center;
 }
+
+.container {
+  height: 90vh;
+}

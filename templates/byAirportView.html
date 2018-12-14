@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  {%set page_title = "View Graph: Total Number of Flights"%}
+  {%set page_title = "View Graph: Flights by Airport"%}
   {%set getChart = True%}
   {%include "header.html"%}
   <body>
@@ -10,8 +10,9 @@
       <canvas id="graphCanvas"></canvas>
     </div>
 
+
     <script type="text/javascript">
-      var graphType = "trafficPie";
+      var graphType = "airportBar";
     </script>
     <script src="{{url_for('static', filename='render_graph.js')}}" charset="utf-8"></script>
   </body>
