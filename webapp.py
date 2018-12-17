@@ -95,10 +95,13 @@ def render_airportView():
 
 @app.route("/byPunctBreakdown") #annotation tells the url that will make this function run
 def render_breakdownView():
+    with open('static/airlines.json') as inFile:
+        allData = json.load(inFile)
+
     try:
         airline = request.args["airline-result"]
         airlineCode = airline.split("(")[1].replace(")", "")
-        return render_template("byPunctualityView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPunctBreakdown drp3", title="Airline Punctuality Breakdown", opts=afx.getAirlines(allData), airline=airlineCode)
+        return render_template("byPunctualityView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPunctBreakdown drp3", current=airline, title="Airline Punctuality Breakdown", opts=afx.getAirlines(allData), airline=airlineCode)
     except:
         return render_template("byPunctualityView.html", navItems=navItems, dropdowns=dropdowns, activePage="byPunctBreakdown drp3", title="Airline Punctuality Breakdown", opts=afx.getAirlines(allData), airline="!!!")
 

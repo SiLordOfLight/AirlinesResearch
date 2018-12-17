@@ -12,25 +12,29 @@
     <div class="main-content">
       {% if airline == "!!!" %}
         <h1>Select an airline to view data on flight punctuality</h1>
+      {%else%}
+        <h1>Breakdown of Flights for {{airline}}</h1>
       {% endif %}
 
       {%set options_type = "airline"%}
-      {%set location = "byPunctualityView"%}
+      {%set location = "byPunctBreakdown"%}
       {%include "selector.html"%}
       <br><br>
+
+      {% if not airline == "!!!" %}
+        <div class="container">
+          <canvas id="graphCanvas"></canvas>
+        </div>
+
+
+        <script type="text/javascript">
+          var graphType = "breakdownPie";
+          var airline = "{{airline}}";
+        </script>
+        <script src="{{url_for('static', filename='render_graph.js')}}" charset="utf-8"></script>
+      {% endif %}
     </div>
 
-    {% if not airline == "!!!" %}
-      <div class="container">
-        <canvas id="graphCanvas"></canvas>
-      </div>
 
-
-      <script type="text/javascript">
-        var graphType = "breakdownPie";
-        var airline = "{{airline}}";
-      </script>
-      <script src="{{url_for('static', filename='render_graph.js')}}" charset="utf-8"></script>
-    {% endif %}
   </body>
 </html>

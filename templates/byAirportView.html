@@ -6,14 +6,22 @@
   <body>
     {% include "navbar.html" %}
 
-    <div class="container">
-      <canvas id="graphCanvas"></canvas>
+    <div class="bg-img">
     </div>
 
+    <div class="main-content">
 
-    <script type="text/javascript">
-      var graphType = "airportBar";
-    </script>
-    <script src="{{url_for('static', filename='render_graph.js')}}" charset="utf-8"></script>
+      <h1>Number of Flights per Airport</h1>
+
+      <div class="container">
+        <canvas id="graphCanvas"></canvas>
+      </div>
+
+
+      <script type="text/javascript">
+        var graphType = "airportBar";
+      </script>
+      <script src="{{url_for('static', filename='render_graph.js')}}" charset="utf-8"></script>
+    </div>
   </body>
 </html>
